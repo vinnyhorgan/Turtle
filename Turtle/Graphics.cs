@@ -1,0 +1,7 @@
+﻿namespace Turtle
+{
+    class Graphics
+    {
+
+    }
+}
