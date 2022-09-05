@@ -58,7 +58,7 @@ namespace Turtle
         /// Callback function used to overwrite the default configuration settings.
         /// </summary>
         /// <returns>Configuration settings.</returns>
-        public virtual Config Conf()
+        protected virtual Config Conf()
         {
             return new Config();
         }
@@ -66,7 +66,7 @@ namespace Turtle
         /// <summary>
         /// Callback function used to draw on the screen every frame.
         /// </summary>
-        public virtual void Draw()
+        protected virtual void Draw()
         {
 
         }
@@ -75,7 +75,7 @@ namespace Turtle
         /// The error handler, used to display error messages.
         /// </summary>
         /// <param name="message">The error message.</param>
-        public virtual void ErrorHandler(string message)
+        protected virtual void ErrorHandler(string message)
         {
             if (Keyboard.IsDown(KeyConstant.LeftControl) && Keyboard.IsDown(KeyConstant.C))
             {
@@ -105,7 +105,7 @@ namespace Turtle
         /// This function is called exactly once at the beginning of the game.
         /// </summary>
         /// <param name="args">Command-line arguments given to the game.</param>
-        public virtual void Load(string[] args)
+        protected virtual void Load(string[] args)
         {
 
         }
@@ -114,7 +114,7 @@ namespace Turtle
         /// Callback function triggered when the game is closed.
         /// </summary>
         /// <returns>Abort quitting. If true, do not close the game.</returns>
-        public virtual bool Quit()
+        protected virtual bool Quit()
         {
             return false;
         }
@@ -123,7 +123,7 @@ namespace Turtle
         /// Callback function used to update the state of the game every frame.
         /// </summary>
         /// <param name="dt">Time since the last update in seconds.</param>
-        public virtual void Update(float dt)
+        protected virtual void Update(float dt)
         {
 
         }
@@ -134,7 +134,7 @@ namespace Turtle
         /// Callback function triggered when one or more directories are dragged and dropped onto the window.
         /// </summary>
         /// <param name="path">A list of the dropped directories paths.</param>
-        public virtual void DirectoryDropped(string[] directories)
+        protected virtual void DirectoryDropped(string[] directories)
         {
 
         }
@@ -143,7 +143,7 @@ namespace Turtle
         /// Callback function triggered when one or more files are dragged and dropped onto the window.
         /// </summary>
         /// <param name="files">A list of the dropped files paths.</param>
-        public virtual void FileDropped(string[] files)
+        protected virtual void FileDropped(string[] files)
         {
 
         }
@@ -152,7 +152,7 @@ namespace Turtle
         /// Callback function triggered when window receives or loses focus.
         /// </summary>
         /// <param name="focus">True if the window gains focus, false if it loses focus.</param>
-        public virtual void Focus(bool focus)
+        protected virtual void Focus(bool focus)
         {
 
         }
@@ -161,7 +161,7 @@ namespace Turtle
         /// Callback function triggered when window receives or loses mouse focus.
         /// </summary>
         /// <param name="focus">Whether the window has mouse focus or not.</param>
-        public virtual void MouseFocus(bool focus)
+        protected virtual void MouseFocus(bool focus)
         {
 
         }
@@ -171,7 +171,7 @@ namespace Turtle
         /// </summary>
         /// <param name="width">The new width.</param>
         /// <param name="height">The new height.</param>
-        public virtual void Resize(int width, int height)
+        protected virtual void Resize(int width, int height)
         {
 
         }
@@ -180,7 +180,7 @@ namespace Turtle
         /// Callback function triggered when window is shown or hidden.
         /// </summary>
         /// <param name="visible">True if the window is visible, false if it isn't.</param>
-        public virtual void Visible(bool visible)
+        protected virtual void Visible(bool visible)
         {
 
         }
@@ -192,7 +192,7 @@ namespace Turtle
         /// </summary>
         /// <param name="key">Character of the pressed key.</param>
         /// <param name="isRepeat">Whether this keypress event is a repeat.</param>
-        public virtual void KeyPressed(KeyConstant key, bool isRepeat)
+        protected virtual void KeyPressed(KeyConstant key, bool isRepeat)
         {
 
         }
@@ -201,7 +201,7 @@ namespace Turtle
         /// Callback function triggered when a keyboard key is released.
         /// </summary>
         /// <param name="key">Character of the released key.</param>
-        public virtual void KeyReleased(KeyConstant key)
+        protected virtual void KeyReleased(KeyConstant key)
         {
 
         }
@@ -215,7 +215,7 @@ namespace Turtle
         /// <param name="y">The mouse position on the y-axis.</param>
         /// <param name="dx">The amount moved along the x-axis since the last time love.mousemoved was called.</param>
         /// <param name="dy">The amount moved along the y-axis since the last time love.mousemoved was called.</param>
-        public virtual void MouseMoved(int x, int y, int dx, int dy)
+        protected virtual void MouseMoved(int x, int y, int dx, int dy)
         {
 
         }
@@ -226,7 +226,7 @@ namespace Turtle
         /// <param name="x">Mouse x position, in pixels.</param>
         /// <param name="y">Mouse y position, in pixels.</param>
         /// <param name="button">The button that was pressed.</param>
-        public virtual void MousePressed(int x, int y, MouseConstant button)
+        protected virtual void MousePressed(int x, int y, MouseConstant button)
         {
 
         }
@@ -237,7 +237,7 @@ namespace Turtle
         /// <param name="x">Mouse x position, in pixels.</param>
         /// <param name="y">Mouse y position, in pixels.</param>
         /// <param name="button">The button that was released.</param>
-        public virtual void MouseReleased(int x, int y, MouseConstant button)
+        protected virtual void MouseReleased(int x, int y, MouseConstant button)
         {
 
         }
@@ -246,7 +246,7 @@ namespace Turtle
         /// Callback function triggered when the mouse wheel is moved.
         /// </summary>
         /// <param name="y">Amount of vertical mouse wheel movement.</param>
-        public virtual void WheelMoved(float y)
+        protected virtual void WheelMoved(float y)
         {
 
         }
@@ -257,7 +257,7 @@ namespace Turtle
         /// The main function, containing the main loop.
         /// </summary>
         /// <param name="args">Command-line arguments given to the game.</param>
-        public void Run(string[] args)
+        protected void Run(string[] args)
         {
             Config conf = Conf();
 
@@ -289,6 +289,8 @@ namespace Turtle
             Raylib.SetTraceLogLevel(TraceLogLevel.LOG_NONE);
 
             Raylib.InitWindow(conf.width, conf.height, conf.title);
+
+            Raylib.InitAudioDevice();
 
             Raylib.SetExitKey(KeyboardKey.KEY_NULL);
 
@@ -331,7 +333,7 @@ namespace Turtle
             }
             else
             {
-                Error("Unable to load default font.");
+                Error("Default font file does not exist.");
             }
 
             Load(args);
@@ -491,6 +493,23 @@ namespace Turtle
                     Raylib.EndDrawing();
                 }
             }
+
+            foreach (Font font in Graphics.GetLoadedFonts())
+            {
+                font.Release();
+            }
+
+            foreach (Image image in Graphics.GetLoadedImages())
+            {
+                image.Release();
+            }
+
+            foreach (Source source in Audio.GetLoadedEffects())
+            {
+                source.Release();
+            }
+
+            Raylib.CloseAudioDevice();
 
             Raylib.CloseWindow();
         }

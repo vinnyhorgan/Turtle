@@ -22,22 +22,14 @@ namespace Turtle
         private static List<Font> _loadedFonts = new List<Font>();
         private static List<Image> _loadedImages = new List<Image>();
 
-        internal static void Close()
-        {
-            foreach (Font font in _loadedFonts)
-            {
-                Raylib.UnloadFont(font.GetRayFont());
-            }
-
-            foreach (Image image in _loadedImages)
-            {
-                Raylib.UnloadTexture(image.GetRayImage());
-            }
-        }
-
         internal static List<Font> GetLoadedFonts()
         {
             return _loadedFonts;
+        }
+
+        internal static List<Image> GetLoadedImages()
+        {
+            return _loadedImages;
         }
 
         public static void Arc(DrawMode mode, int x, int y, float radius, float startAngle, float endAngle, int segments = 10)

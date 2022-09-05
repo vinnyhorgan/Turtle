@@ -1,15 +1,17 @@
-﻿namespace Turtle
+﻿using Raylib_cs;
+
+namespace Turtle
 {
     public class Image
     {
-        private Raylib_cs.Texture2D _rayImage;
+        private Texture2D _rayImage;
 
-        internal Image(Raylib_cs.Texture2D rayImage)
+        internal Image(Texture2D rayImage)
         {
             _rayImage = rayImage;
         }
 
-        internal Raylib_cs.Texture2D GetRayImage()
+        internal Texture2D GetRayImage()
         {
             return _rayImage;
         }
