@@ -1,5 +1,6 @@
 ﻿using Turtle;
 using System;
+using System.Numerics;
 
 namespace Demo
 {
@@ -26,7 +27,8 @@ namespace Demo
 
         public override void Update(float dt)
         {
-
+            if (Keyboard.IsDown(KeyConstant.A))
+                Console.WriteLine("Hellooo");
         }
 
         public override void Draw()
@@ -36,6 +38,10 @@ namespace Demo
             Graphics.Print("FPS: " + Timer.GetFPS(), 10, 150);
             Graphics.Print("TIME: " + Timer.GetTime(), 10, 200);
             Graphics.Print("STEP: " + Timer.Step(), 10, 250);
+
+            Graphics.Arc(DrawMode.Line, 200, 200, 50, -135, 135, 100);
+
+            Graphics.Line(new Vector2(10, 10), new Vector2(400, 69), new Vector2(500, 400), new Vector2(100, 44));
         }
 
         public override void Resize(int width, int height)
@@ -57,7 +63,7 @@ namespace Demo
 
             if (key == KeyConstant.Space)
             {
-                Timer.Sleep(1);
+                Keyboard.SetKeyRepeat(!Keyboard.HasKeyRepeat());
             }
         }
 
@@ -79,6 +85,11 @@ namespace Demo
         public override void WheelMoved(float scroll)
         {
             Console.WriteLine("Wheel Moved");
+        }
+
+        public override void MouseMoved(int x, int y, int dx, int dy)
+        {
+            Console.WriteLine($"{x} {y} {dx} {dy}");
         }
     }
 }

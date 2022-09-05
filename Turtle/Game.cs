@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Numerics;
 
 namespace Turtle
 {
@@ -14,6 +15,7 @@ namespace Turtle
         private static string _version = "1.0";
         private static float _timer = 0.0f;
         private static List<float> _deltas = new();
+        private static Vector2 _mousePosition = Mouse.GetPosition();
 
         internal static void SetError(string message)
         {
@@ -67,6 +69,11 @@ namespace Turtle
         }
 
         public virtual void WheelMoved(float scroll)
+        {
+
+        }
+
+        public virtual void MouseMoved(int x, int y, int dx, int dy)
         {
 
         }
@@ -159,13 +166,23 @@ namespace Turtle
                 {
                     foreach (int key in Enum.GetValues(typeof(KeyConstant)))
                     {
-                        if (Raylib.IsKeyPressed((KeyboardKey)key))
+                        if (Keyboard.HasKeyRepeat())
                         {
-                            KeyPressed((KeyConstant)key);
+                            if (Keyboard.IsDown((KeyConstant)key))
+                            {
+                                KeyPressed((KeyConstant)key);
+                            }
                         }
-                        else if (Raylib.IsKeyReleased((KeyboardKey)key))
+                        else
                         {
-                            KeyReleased((KeyConstant)key);
+                            if (Raylib.IsKeyPressed((KeyboardKey)key))
+                            {
+                                KeyPressed((KeyConstant)key);
+                            }
+                            else if (Raylib.IsKeyReleased((KeyboardKey)key))
+                            {
+                                KeyReleased((KeyConstant)key);
+                            }
                         }
                     }
 
@@ -184,6 +201,13 @@ namespace Turtle
                     if (Raylib.GetMouseWheelMove() != 0)
                     {
                         WheelMoved(Raylib.GetMouseWheelMove());
+                    }
+
+                    if (Mouse.GetPosition() != _mousePosition)
+                    {
+                        Vector2 newPosition = Mouse.GetPosition();
+                        MouseMoved((int)newPosition.X, (int)newPosition.Y, (int)newPosition.X - (int)_mousePosition.X, (int)newPosition.Y - (int)_mousePosition.Y);
+                        _mousePosition = newPosition;
                     }
 
                     if (Raylib.IsFileDropped())
@@ -214,7 +238,7 @@ namespace Turtle
 
                     Raylib.BeginDrawing();
 
-                    Raylib.ClearBackground(new Color(0, 0, 0).GetRayColor());
+                    Graphics.Clear();
 
                     Draw();
 
@@ -229,7 +253,7 @@ namespace Turtle
 
                     Raylib.BeginDrawing();
 
-                    Raylib.ClearBackground(new Color(89, 157, 220).GetRayColor());
+                    Raylib.ClearBackground(new Color(89, 157, 220).ToRayColor());
 
                     Graphics.Print("Error", 100, 100);
                     Graphics.Print(_errorMessage, 100, 150);
