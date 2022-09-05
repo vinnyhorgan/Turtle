@@ -10,7 +10,6 @@ namespace Demo
         {
             Config conf = new();
 
-            conf.version = "1.0";
             conf.icon = "assets/demo.png";
             conf.width = 1280;
             conf.height = 720;
@@ -20,7 +19,7 @@ namespace Demo
             return conf;
         }
 
-        public override void Load()
+        public override void Load(string[] args)
         {
 
         }
@@ -38,58 +37,31 @@ namespace Demo
             Graphics.Print("FPS: " + Timer.GetFPS(), 10, 150);
             Graphics.Print("TIME: " + Timer.GetTime(), 10, 200);
             Graphics.Print("STEP: " + Timer.Step(), 10, 250);
+            Graphics.Print(Game.GetVersion().ToString(), 10, 400);
 
             Graphics.Arc(DrawMode.Line, 200, 200, 50, -135, 135, 100);
 
             Graphics.Line(new Vector2(10, 10), new Vector2(400, 69), new Vector2(500, 400), new Vector2(100, 44));
         }
 
-        public override void Resize(int width, int height)
-        {
-            Console.WriteLine(width + "   " + height);
-        }
-
         public override void FileDropped(string[] files)
         {
+            Console.WriteLine("FILE");
+
             foreach (string file in files)
             {
                 Console.WriteLine(file);
             }
         }
 
-        public override void KeyPressed(KeyConstant key)
+        public override void DirectoryDropped(string[] directories)
         {
-            Console.WriteLine(key);
+            Console.WriteLine("DIRECTORY");
 
-            if (key == KeyConstant.Space)
+            foreach (string dir in directories)
             {
-                Keyboard.SetKeyRepeat(!Keyboard.HasKeyRepeat());
+                Console.WriteLine(dir);
             }
-        }
-
-        public override void KeyReleased(KeyConstant key)
-        {
-            Console.WriteLine(key);
-        }
-
-        public override void MousePressed(MouseConstant button)
-        {
-            Console.WriteLine(button);
-        }
-
-        public override void MouseReleased(MouseConstant button)
-        {
-            Console.WriteLine(button);
-        }
-
-        public override void WheelMoved(float scroll)
-        {
-            Console.WriteLine("Wheel Moved");
-        }
-
-        public override void MouseMoved(int x, int y, int dx, int dy)
-        {
-            Console.WriteLine($"{x} {y} {dx} {dy}");
         }
     }
 }
