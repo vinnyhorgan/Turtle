@@ -18,10 +18,9 @@ namespace Turtle
         private static bool _error = false;
         private static string _errorMessage = "";
         private static bool _copied = false;
+        private static bool _exitRequested = false;
 
         private bool _exit = false;
-        private bool _exitRequested = false;
-
         private bool _focus = false;
         private bool _mouseFocus = false;
         private bool _visible = false;
@@ -29,6 +28,11 @@ namespace Turtle
 
         private float _timer = 0.0f;
         private List<float> _deltas = new();
+
+        internal static void SetExitRequested(bool exitRequested)
+        {
+            _exitRequested = exitRequested;
+        }
 
         // Functions
 
@@ -290,21 +294,15 @@ namespace Turtle
 
             Raylib.InitWindow(conf.width, conf.height, conf.title);
 
+            Window.SetTitle(conf.title);
+
             Raylib.InitAudioDevice();
 
             Raylib.SetExitKey(KeyboardKey.KEY_NULL);
 
             if (conf.icon is not null)
             {
-                if (File.Exists(conf.icon))
-                {
-                    Raylib_cs.Image newIcon = Raylib.LoadImage(conf.icon);
-                    Raylib.SetWindowIcon(newIcon);
-                }
-                else
-                {
-                    Error("Icon does not exist.");
-                }
+                Window.SetIcon(conf.icon);
             }
 
             if (conf.resizable)
@@ -314,7 +312,7 @@ namespace Turtle
 
             if (conf.vsync)
             {
-                Raylib.SetTargetFPS(Raylib.GetMonitorRefreshRate(Raylib.GetCurrentMonitor()));
+                Window.SetVSync(conf.vsync);
             }
 
             if (conf.fullscreen)
@@ -324,17 +322,10 @@ namespace Turtle
 
             if (conf.x is not null && conf.y is not null)
             {
-                Raylib.SetWindowPosition((int)conf.x, (int)conf.y);
+                Window.SetPosition((int)conf.x, (int)conf.y);
             }
 
-            if (File.Exists("assets/Vera.ttf"))
-            {
-                Graphics.SetNewFont("assets/Vera.ttf");
-            }
-            else
-            {
-                Error("Default font file does not exist.");
-            }
+            Graphics.SetNewFont("assets/Vera.ttf");
 
             Load(args);
 
@@ -391,15 +382,15 @@ namespace Turtle
                         Raylib.ClearDroppedFiles();
                     }
 
-                    if (_focus != Raylib.IsWindowFocused())
+                    if (_focus != Window.HasFocus())
                     {
-                        _focus = Raylib.IsWindowFocused();
+                        _focus = Window.HasFocus();
                         Focus(_focus);
                     }
 
-                    if (_mouseFocus != Raylib.IsCursorOnScreen())
+                    if (_mouseFocus != Window.HasMouseFocus())
                     {
-                        _mouseFocus = Raylib.IsCursorOnScreen();
+                        _mouseFocus = Window.HasMouseFocus();
                         MouseFocus(_mouseFocus);
                     }
 
@@ -408,9 +399,9 @@ namespace Turtle
                         Resize(Graphics.GetWidth(), Graphics.GetHeight());
                     }
 
-                    if (_visible != !Raylib.IsWindowHidden())
+                    if (_visible != Window.IsVisible())
                     {
-                        _visible = !Raylib.IsWindowHidden();
+                        _visible = Window.IsVisible();
                         Visible(_visible);
                     }
 
