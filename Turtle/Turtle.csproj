@@ -5,7 +5,32 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <Title>Turtle</Title>
+    <Version>0.1.0</Version>
+    <Authors>Vinny Horgan</Authors>
+    <Description>Turtle is an awesome game framework for C#.</Description>
+    <PackageIcon>logo_128x128.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/vinnyhorgan/Turtle</RepositoryUrl>
+    <PackageTags>turtle;love2d;game</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\Logo\logo_128x128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aether.Physics2D" Version="1.6.1" PrivateAssets="compile" />
