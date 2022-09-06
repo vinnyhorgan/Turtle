@@ -15,6 +15,7 @@
     <PackageTags>turtle;love2d;game</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Turtle-nuget</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
