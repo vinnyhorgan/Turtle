@@ -28,7 +28,7 @@ namespace Turtle
             switch (Environment.OSVersion.Platform)
             {
                 case PlatformID.Unix:
-                    return OS.Linux
+                    return OS.Linux;
                 case PlatformID.MacOSX:
                     return OS.Macos;
                 case PlatformID.Win32NT:

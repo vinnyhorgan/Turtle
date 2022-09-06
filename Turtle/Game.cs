@@ -261,7 +261,7 @@ namespace Turtle
         /// The main function, containing the main loop.
         /// </summary>
         /// <param name="args">Command-line arguments given to the game.</param>
-        protected void Run(string[] args)
+        public void Run(string[] args)
         {
             Config conf = Conf();
 

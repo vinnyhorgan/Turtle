@@ -9,7 +9,7 @@ namespace Turtle
     {
         private Sound _raySound;
         private Music _rayMusic;
-        private SourceType _type;
+        private readonly SourceType _type;
 
         private bool _paused = false;
         private float _pitch = 1.0f;
@@ -18,11 +18,13 @@ namespace Turtle
         internal Source(Sound raySound)
         {
             _raySound = raySound;
+            _type = SourceType.Static;
         }
 
         internal Source(Music rayMusic)
         {
             _rayMusic = rayMusic;
+            _type = SourceType.Stream;
         }
 
         internal Sound GetRaySound()
