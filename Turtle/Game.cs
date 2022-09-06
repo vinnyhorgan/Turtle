@@ -90,7 +90,7 @@ namespace Turtle
                 _copied = true;
             }
 
-            Graphics.Clear(89 / 255, 157 / 255, 220 / 255);
+            Graphics.Clear(89.0f / 255, 157.0f / 255, 220.0f / 255);
 
             Graphics.Print("Error", 100, 100);
             Graphics.Print(_errorMessage, 100, 150);
@@ -332,7 +332,32 @@ namespace Turtle
                 Window.SetPosition((int)conf.x, (int)conf.y);
             }
 
-            Graphics.SetNewFont("assets/Vera.ttf");
+            if (File.Exists("assets/Vera.ttf"))
+            {
+                Graphics.SetNewFont("assets/Vera.ttf");
+            }
+            else
+            {
+                System.Reflection.Assembly assembly = typeof(Game).Assembly;
+
+                Stream? defaultFont = assembly.GetManifestResourceStream("Turtle.assets.Vera.ttf");
+
+                if (defaultFont is not null)
+                {
+                    Filesystem.CreateDirectory("assets");
+
+                    using (Stream file = File.Create("assets/Vera.ttf"))
+                    {
+                        defaultFont.CopyTo(file);
+                    }
+
+                    Graphics.SetNewFont("assets/Vera.ttf");
+                }
+                else
+                {
+                    Error("Could not load default font.");
+                }
+            }
 
             Load(args);
 

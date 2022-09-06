@@ -19,6 +19,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\Vera.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets\Vera.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -38,12 +46,6 @@
     <PackageReference Include="ENet-CSharp" Version="2.4.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" PrivateAssets="compile" />
     <PackageReference Include="Raylib-cs" Version="4.0.0.2" PrivateAssets="compile" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="assets\Vera.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
