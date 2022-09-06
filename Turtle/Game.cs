@@ -492,17 +492,17 @@ namespace Turtle
                 }
             }
 
-            foreach (Font font in Graphics.GetLoadedFonts())
+            foreach (Font font in Graphics.GetLoadedFonts().ToList())
             {
                 font.Release();
             }
 
-            foreach (Image image in Graphics.GetLoadedImages())
+            foreach (Image image in Graphics.GetLoadedImages().ToList())
             {
                 image.Release();
             }
 
-            foreach (Source source in Audio.GetLoadedEffects())
+            foreach (Source source in Audio.GetLoadedEffects().ToList())
             {
                 source.Release();
             }
