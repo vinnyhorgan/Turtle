@@ -90,7 +90,7 @@ namespace Turtle
                 _copied = true;
             }
 
-            Graphics.Clear(89, 157, 220);
+            Graphics.Clear(89 / 255, 157 / 255, 220 / 255);
 
             Graphics.Print("Error", 100, 100);
             Graphics.Print(_errorMessage, 100, 150);
@@ -302,7 +302,14 @@ namespace Turtle
 
             if (conf.icon is not null)
             {
-                Window.SetIcon(conf.icon);
+                if (File.Exists(conf.icon))
+                {
+                    Window.SetIcon(conf.icon);
+                }
+                else
+                {
+                    Error("Icon does not exist.");
+                }
             }
 
             if (conf.resizable)
@@ -331,25 +338,25 @@ namespace Turtle
 
             while (!_exit)
             {
+                if (Raylib.WindowShouldClose())
+                {
+                    _exitRequested = true;
+                }
+
+                if (_exitRequested)
+                {
+                    if (Quit())
+                    {
+                        _exitRequested = false;
+                    }
+                    else
+                    {
+                        _exit = true;
+                    }
+                }
+
                 if (!_error)
                 {
-                    if (Raylib.WindowShouldClose())
-                    {
-                        _exitRequested = true;
-                    }
-
-                    if (_exitRequested)
-                    {
-                        if (Quit())
-                        {
-                            _exitRequested = false;
-                        }
-                        else
-                        {
-                            _exit = true;
-                        }
-                    }
-
                     if (Raylib.IsFileDropped())
                     {
                         string[] paths = Raylib.GetDroppedFiles();

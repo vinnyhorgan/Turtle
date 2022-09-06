@@ -8,7 +8,7 @@ namespace Demo
         {
             Config conf = new();
 
-            conf.icon = "assets/demo.png";
+            conf.icon = "assets/icon.png";
 
             return conf;
         }
@@ -21,6 +21,11 @@ namespace Demo
         protected override void Update(float dt)
         {
             Physics.Update(dt);
+
+            if (Mouse.IsDown(MouseConstant.Left))
+            {
+                Physics.CreateBall();
+            }
         }
 
         protected override void Draw()

@@ -1,18 +1,22 @@
-﻿namespace Turtle
+﻿using Raylib_cs;
+
+using System.Numerics;
+
+namespace Turtle
 {
     public struct Color
     {
-        public byte R;
-        public byte G;
-        public byte B;
-        public byte A;
+        public float R;
+        public float G;
+        public float B;
+        public float A;
 
         internal Raylib_cs.Color ToRayColor()
         {
-            return new Raylib_cs.Color(R, G, B, A);
+            return Raylib.ColorFromNormalized(new Vector4(R, G, B, A));
         }
 
-        public Color(byte r, byte g, byte b, byte a = 255)
+        public Color(float r, float g, float b, float a = 1)
         {
             R = r;
             G = g;
