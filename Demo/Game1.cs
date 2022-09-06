@@ -15,7 +15,7 @@ namespace Demo
 
         protected override void Load(string[] args)
         {
-
+            Physics.Init();
         }
 
         protected override void Update(float dt)
@@ -25,7 +25,9 @@ namespace Demo
 
         protected override void Draw()
         {
-            Physics.Draw();
+            Graphics.Print("BODIES: " + Physics.Draw(), 10, 50);
+
+            Graphics.Print("FPS: " + Timer.GetFPS(), 10, 10);
         }
 
         protected override void MousePressed(int x, int y, MouseConstant button)

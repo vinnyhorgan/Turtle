@@ -8,13 +8,27 @@ namespace Turtle
 {
     public static class Physics
     {
-        private static World _world = new World();
+        private static float PPM = 64.0f;
+
+        private static World _world = new World(new Vector2(0, 10f));
         private static List<Body> _balls = new();
+        private static Body _ground;
+
+        public static void Init()
+        {
+            _ground = _world.CreateBody(new Vector2(100 / PPM, 400 / PPM));
+            Fixture f = _ground.CreateRectangle(600 / PPM, 100 / PPM, 1.0f, new Vector2(300 / PPM, 50 / PPM));
+
+            f.Restitution = 0.3f;
+            f.Friction = 0.5f;
+        }
 
         public static void CreateBall()
         {
-            Body newBall = _world.CreateBody(new Vector2(Mouse.GetX(), Mouse.GetY()), 0, BodyType.Dynamic);
-            Fixture fixture = newBall.CreateCircle(25, 1f);
+            Body newBall = _world.CreateBody(new Vector2(Mouse.GetX() / PPM, Mouse.GetY() / PPM), 0, BodyType.Dynamic);
+            Fixture f = newBall.CreateCircle(25 / PPM, 1.0f);
+            f.Restitution = 0.3f;
+            f.Friction = 0.5f;
 
             _balls.Add(newBall);
         }
@@ -27,12 +41,18 @@ namespace Turtle
             }
         }
 
-        public static void Draw()
+        public static int Draw()
         {
             foreach (Body ball in _balls)
             {
-                Graphics.Circle(DrawMode.Line, (int)ball.Position.X, (int)ball.Position.Y, 25);
+                Graphics.Circle(DrawMode.Line, (int)(ball.Position.X * PPM), (int)(ball.Position.Y * PPM), 25);
             }
+
+            Graphics.Rectangle(DrawMode.Line, (int)(_ground.Position.X * PPM), (int)(_ground.Position.Y * PPM), 600, 100);
+
+            BodyCollection coll = _world.BodyList;
+
+            return coll.Count;
         }
     }
 }
