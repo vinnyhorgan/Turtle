@@ -8,7 +8,7 @@
         /// <summary>
         /// The Turtle version this game was made for.
         /// </summary>
-        public Version version = new Version(0, 1, 0, "Evil Turtle");
+        public Version version = new Version(0, 1, 2, "LÖVEly Turtles");
 
         /// <summary>
         /// The window title.

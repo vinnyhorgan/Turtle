@@ -13,7 +13,7 @@ namespace Turtle
     /// </summary>
     public class Game
     {
-        private static Version _version = new Version(0, 1, 0, "Evil Turtle");
+        private static Version _version = new Version(0, 1, 2, "LÖVEly Turtles");
 
         private static bool _error = false;
         private static string _errorMessage = "";

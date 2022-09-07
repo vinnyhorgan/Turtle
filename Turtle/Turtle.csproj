@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <Title>Turtle</Title>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <Authors>Vinny Horgan</Authors>
     <Description>Turtle is an awesome game framework for C#.</Description>
     <PackageIcon>logo_128x128.png</PackageIcon>

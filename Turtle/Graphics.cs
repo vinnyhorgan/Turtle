@@ -113,11 +113,9 @@ namespace Turtle
         /// <param name="offset">Origin offset.</param>
         public static void Draw(Image image, int x, int y, float rotation = 0.0f, float scale = 1.0f, Vector2 offset = new Vector2())
         {
-            Raylib.DrawTextureTiled(
+            Raylib.DrawTextureEx(
                 image.GetRayImage(),
-                new Rectangle(x, y, image.GetRayImage().width, image.GetRayImage().width),
-                new Rectangle(x, y, image.GetRayImage().width, image.GetRayImage().width),
-                offset,
+                new Vector2(x, y),
                 rotation * (180 / System.MathF.PI),
                 scale,
                 _currentColor.ToRayColor()
