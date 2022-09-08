@@ -1,4 +1,4 @@
-﻿namespace Demo
+﻿namespace NoGame
 {
     class Program
     {

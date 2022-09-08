@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Demo
+namespace NoGame
 {
     class Game1 : Game
     {

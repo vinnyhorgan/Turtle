@@ -1,8 +1,6 @@
 ﻿using Turtle;
 
-using System.Numerics;
-
-namespace Demo
+namespace NoGame
 {
     public class Hearth
     {

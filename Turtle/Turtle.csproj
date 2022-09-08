@@ -10,12 +10,12 @@
     <Authors>Vinny Horgan</Authors>
     <Description>Turtle is an awesome game framework for C#.</Description>
     <PackageIcon>logo_128x128.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/vinnyhorgan/Turtle</RepositoryUrl>
     <PackageTags>turtle;love2d;game</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>Turtle-nuget</PackageId>
+    <Copyright>Copyright (c) Vinny Horgan 2022</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

@@ -235,7 +235,7 @@ namespace Turtle
         /// <param name="position">The position to draw the object.</param>
         /// <param name="rotation">Orientation (radians).</param>
         /// <param name="offset">Origin offset.</param>
-        public static void Print(string text, Vector2 position = new Vector2(), float rotation = 0.0f, Vector2 offset = new Vector2())
+        public static void Print(string text, Vector2 position, float rotation = 0.0f, Vector2 offset = new Vector2())
         {
             if (_currentFont is not null)
             {
